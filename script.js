@@ -4,6 +4,11 @@
   const $$ = (s, root = document) => [...root.querySelectorAll(s)];
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   $('#year').textContent = new Date().getFullYear();
+  const shortcutMod = $('[data-shortcut-mod]');
+  if (shortcutMod) {
+    const platform = navigator.userAgentData?.platform || navigator.platform || '';
+    shortcutMod.textContent = /Mac|iPhone|iPad/i.test(platform) ? '⌘' : 'Ctrl';
+  }
 
   // Small canvas artwork: local-only, pointer-reactive, and respectful of reduced motion.
   const canvas = $('#network-canvas');
